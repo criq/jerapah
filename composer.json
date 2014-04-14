@@ -3,7 +3,9 @@
 	"description": "qr code payment utility",
 	"type": "library",
 	"require" : {
-		"jabli/katu": "dev-master"
+		"tecnick.com/tcpdf": "dev-master",
+		"setasign/fpdi": "*",
+		"gchartphp/gchartphp": "dev-master"
 	},
 	"autoload": {
 		"psr-4": {
