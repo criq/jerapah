@@ -63,11 +63,11 @@ class Jerapah {
 		return $string;
 	}
 
-	public function getImageURL($provider) {
+	public function getImageURL($provider, $size) {
 		switch ($provider) {
 			case 'google' :
 
-				$image = new \gchart\gQRCode(400, 400);
+				$image = new \gchart\gQRCode($size, $size);
 				$image->setQRCode($this->getString());
 
 				$url = $image->getUrl();
