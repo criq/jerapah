@@ -3,7 +3,7 @@
 	"description": "qr code payment utility",
 	"type": "library",
 	"require" : {
-		"tecnick.com/tcpdf": "dev-master",
+		"tecnick.com/tcpdf": "6.*",
 		"setasign/fpdi": "dev-master",
 		"gchartphp/gchartphp": "dev-master"
 	},
