@@ -1,0 +1,13 @@
+{
+	"name": "jabli/jerepah",
+	"description": "qr code payment utility",
+	"type": "library",
+	"require" : {
+		"jabli/katu": "dev-master"
+	},
+	"autoload": {
+		"psr-4": {
+			"Jerepah\\": "src/"
+		}
+	}
+}
