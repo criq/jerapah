@@ -63,4 +63,22 @@ class Jerapah {
 		return $string;
 	}
 
+	public function getImageURL($provider) {
+		switch ($provider) {
+			case 'google' :
+
+				$image = new \gchart\gQRCode(400, 400);
+				$image->setQRCode($this->getString());
+
+				$url = $image->getUrl();
+				$url = preg_replace('#&amp;#', '&', $url);
+
+				return $url;
+
+			break;
+		}
+
+		throw new Exception("Invalid provider.");
+	}
+
 }
