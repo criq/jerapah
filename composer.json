@@ -1,5 +1,5 @@
 {
-	"name": "jabli/jerepah",
+	"name": "jabli/jerapah",
 	"description": "qr code payment utility",
 	"type": "library",
 	"require" : {
