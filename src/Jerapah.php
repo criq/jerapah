@@ -14,11 +14,11 @@ class Jerapah {
 	}
 
 	static function make($version = NULL) {
-		return new self($version);
+		return new static($version);
 	}
 
 	public function setAccount($value) {
-		$this->params['ACC'] = $value;
+		$this->params['ACC'] = preg_replace('#\s#', null, $value);
 
 		return $this;
 	}
@@ -63,7 +63,7 @@ class Jerapah {
 		return $string;
 	}
 
-	public function getImageURL($provider, $size) {
+	public function getImageUrl($size, $provider = 'google') {
 		switch ($provider) {
 			case 'google' :
 
