@@ -7,13 +7,17 @@ class Jerapah {
 	public $version = '1.0';
 	public $params = array();
 
-	public function __construct($version = NULL) {
+	public function __construct($version = null) {
 		if (!is_null($version)) {
 			$this->version = $version;
 		}
 	}
 
-	static function make($version = NULL) {
+	public function __toString() {
+		return $this->getImageUrl(400);
+	}
+
+	static function make($version = null) {
 		return new static($version);
 	}
 
