@@ -5,7 +5,7 @@ namespace Jerapah;
 class Jerapah {
 
 	public $version = '1.0';
-	public $params = array();
+	public $params = [];
 
 	public function __construct($version = null) {
 		if (!is_null($version)) {
