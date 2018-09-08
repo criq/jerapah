@@ -76,6 +76,7 @@ class Jerapah {
 
 				$url = $image->getUrl();
 				$url = preg_replace('#&amp;#', '&', $url);
+				$url = preg_replace('/^http:/', 'https:', $url);
 
 				return $url;
 
