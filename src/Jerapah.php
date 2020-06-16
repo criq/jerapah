@@ -96,7 +96,7 @@ class Jerapah
 		throw new \Exception("Invalid provider.");
 	}
 
-	public function getEncoded() : string
+	public function getEncoded()
 	{
 		try {
 			$curl = new \Curl\Curl;
