@@ -2,62 +2,72 @@
 
 namespace Jerapah;
 
-class Jerapah {
-
+class Jerapah
+{
 	public $version = '1.0';
 	public $params = [];
 
-	public function __construct($version = null) {
+	public function __construct($version = null)
+	{
 		if (!is_null($version)) {
 			$this->version = $version;
 		}
 	}
 
-	public function __toString() {
+	public function __toString()
+	{
 		return $this->getImageUrl(400);
 	}
 
-	static function make($version = null) {
+	public static function make($version = null)
+	{
 		return new static($version);
 	}
 
-	public function setAccount($value) {
-		$this->params['ACC'] = preg_replace('#\s#', null, $value);
+	public function setAccount($value)
+	{
+		$this->params['ACC'] = preg_replace('/\s/', null, $value);
 
 		return $this;
 	}
 
-	public function setAmount($value) {
+	public function setAmount($value)
+	{
 		$this->params['AM'] = $value;
 
 		return $this;
 	}
 
-	public function setCurrency($value) {
+	public function setCurrency($value)
+	{
 		$this->params['CC'] = $value;
 
 		return $this;
 	}
 
-	public function setInMessage($value) {
+	public function setInMessage($value)
+	{
 		$this->params['MSG'] = $value;
 
 		return $this;
 	}
 
-	public function setVS($value) {
+	public function setVS($value)
+	{
 		$this->params['X-VS'] = $value;
 
 		return $this;
 	}
 
-	public function setURL($value) {
+	public function setURL($value)
+	{
 		$this->params['X-URL'] = $value;
 
 		return $this;
 	}
 
-	public function getString() {
+	public function getString()
+	{
 		$string = 'SPD*' . $this->version . '*';
 
 		foreach ($this->params as $key => $value) {
@@ -67,10 +77,10 @@ class Jerapah {
 		return $string;
 	}
 
-	public function getImageUrl($size, $provider = 'google') {
+	public function getImageUrl($size, $provider = 'google')
+	{
 		switch ($provider) {
-			case 'google' :
-
+			case 'google':
 				$image = new \gchart\gQRCode($size, $size);
 				$image->setQRCode($this->getString());
 
@@ -80,10 +90,9 @@ class Jerapah {
 
 				return $url;
 
-			break;
+				break;
 		}
 
-		throw new Exception("Invalid provider.");
+		throw new \Exception("Invalid provider.");
 	}
-
 }
