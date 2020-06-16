@@ -3,7 +3,8 @@
 	"description": "qr code payment utility",
 	"type": "library",
 	"require" : {
-		"gchartphp/gchartphp": "@dev"
+		"curl/curl": "@stable",
+		"gchartphp/gchartphp": "@stable"
 	},
 	"autoload": {
 		"psr-4": {

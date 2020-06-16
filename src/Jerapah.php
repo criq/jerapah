@@ -77,7 +77,7 @@ class Jerapah
 		return $string;
 	}
 
-	public function getImageUrl($size, $provider = 'google')
+	public function getImageUrl($size = 400, $provider = 'google')
 	{
 		switch ($provider) {
 			case 'google':
@@ -94,5 +94,18 @@ class Jerapah
 		}
 
 		throw new \Exception("Invalid provider.");
+	}
+
+	public function getEncoded() : string
+	{
+		try {
+			$curl = new \Curl\Curl;
+			$res = $curl->get($this->getImageUrl());
+			$info = $curl->getInfo();
+
+			return 'data:' . $info['content_type'] . ';base64,' . base64_encode($res);
+		} catch (\Exception $e) {
+			return '';
+		}
 	}
 }
