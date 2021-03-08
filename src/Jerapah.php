@@ -81,14 +81,11 @@ class Jerapah
 	{
 		switch ($provider) {
 			case 'google':
-				$image = new \gchart\gQRCode($size, $size);
-				$image->setQRCode($this->getString());
-
-				$url = $image->getUrl();
-				$url = preg_replace('#&amp;#', '&', $url);
-				$url = preg_replace('/^http:/', 'https:', $url);
-
-				return $url;
+				return \Katu\Types\TUrl::make('https://chart.googleapis.com/chart', [
+					'cht' => 'qr',
+					'chs' => $size,
+					'chl' => $this->getString(),
+				]);
 
 				break;
 		}
