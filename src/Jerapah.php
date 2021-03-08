@@ -16,7 +16,7 @@ class Jerapah
 
 	public function __toString()
 	{
-		return $this->getImageUrl(400);
+		return (string)$this->getImageUrl(400);
 	}
 
 	public static function make($version = null)
