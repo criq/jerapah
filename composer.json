@@ -4,7 +4,7 @@
 	"type": "library",
 	"require" : {
 		"curl/curl": "@stable",
-		"gchartphp/gchartphp": "@stable"
+		"imotorbike/gchartphp": "@stable"
 	},
 	"autoload": {
 		"psr-4": {
