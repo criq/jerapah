@@ -77,22 +77,18 @@ class Jerapah
 		return $string;
 	}
 
-	public function getImageUrl(int $size, string $provider = 'google'): string
-	{
-		switch ($provider) {
-			case 'google':
-				$image = new \gchart\gQRCode($size, $size);
-				$image->setQRCode($this->getString());
+	// public function getImage()
+	// {
+	// 	$writer = new \PngWrite
 
-				$url = $image->getUrl();
-				$url = preg_replace('#&amp;#', '&', $url);
-				$url = preg_replace('/^http:/', 'https:', $url);
-
-				return $url;
-
-				break;
-		}
-
-		throw new \Exception("Invalid provider.");
-	}
+	// 	// Create QR code
+	// 	$qrCode = QrCode::create('Data')
+	// 			->setEncoding(new Encoding('UTF-8'))
+	// 			->setErrorCorrectionLevel(new ErrorCorrectionLevelLow())
+	// 			->setSize(300)
+	// 			->setMargin(10)
+	// 			->setRoundBlockSizeMode(new RoundBlockSizeModeMargin())
+	// 			->setForegroundColor(new Color(0, 0, 0))
+	// 			->setBackgroundColor(new Color(255, 255, 255));
+	// }
 }

@@ -3,7 +3,8 @@
 	"description": "qr code payment utility",
 	"type": "library",
 	"require" : {
-		"curl/curl": "@stable"
+		"curl/curl": "@stable",
+		"endroid/qr-code": "@stable"
 	},
 	"autoload": {
 		"psr-4": {
