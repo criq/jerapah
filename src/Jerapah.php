@@ -69,7 +69,6 @@ class Jerapah
 	public function getString(): string
 	{
 		$string = 'SPD*' . $this->version . '*';
-
 		foreach ($this->params as $key => $value) {
 			$string .= $key . ':' . $value . '*';
 		}
@@ -77,18 +76,15 @@ class Jerapah
 		return $string;
 	}
 
-	// public function getImage()
-	// {
-	// 	$writer = new \PngWrite
-
-	// 	// Create QR code
-	// 	$qrCode = QrCode::create('Data')
-	// 			->setEncoding(new Encoding('UTF-8'))
-	// 			->setErrorCorrectionLevel(new ErrorCorrectionLevelLow())
-	// 			->setSize(300)
-	// 			->setMargin(10)
-	// 			->setRoundBlockSizeMode(new RoundBlockSizeModeMargin())
-	// 			->setForegroundColor(new Color(0, 0, 0))
-	// 			->setBackgroundColor(new Color(255, 255, 255));
-	// }
+	public function getImageUrl(int $size): ?string
+	{
+		try {
+			return "https://api.qrserver.com/v1/create-qr-code/?" . http_build_query([
+				'size' => "{$size}x{$size}",
+				'data' => $this->getString(),
+			]);
+		} catch (\Throwable $e) {
+			return null;
+		}
+	}
 }
