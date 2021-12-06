@@ -31,7 +31,7 @@ class Jerapah
 		return $this;
 	}
 
-	public function setAmount(string $value): Jerapah
+	public function setAmount(float $value): Jerapah
 	{
 		$this->params['AM'] = $value;
 
