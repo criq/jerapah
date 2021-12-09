@@ -4,7 +4,7 @@
 	"type": "library",
 	"require" : {
 		"curl/curl": "@stable",
-		"endroid/qr-code": "@stable"
+		"globalcitizen/php-iban": "@stable"
 	},
 	"autoload": {
 		"psr-4": {

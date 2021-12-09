@@ -87,4 +87,18 @@ class Jerapah
 			return null;
 		}
 	}
+
+	public static function generateIBAN(string $bankCode, ?string $accountPrefix, string $accountNumber): string
+	{
+		$iban = new \PHP_IBAN\IBAN(implode([
+			'CZ',
+			'00',
+			$bankCode,
+			str_pad($accountPrefix, 6, 0, \STR_PAD_LEFT),
+			str_pad($accountNumber, 10, 0, \STR_PAD_LEFT),
+		]));
+		$iban->setChecksum();
+
+		return $iban->iban;
+	}
 }
