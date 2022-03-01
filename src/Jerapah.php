@@ -4,7 +4,7 @@ namespace Jerapah;
 
 class Jerapah
 {
-	public $version = '1.0';
+	public $version = "1.0";
 	public $params = [];
 
 	public function __construct($version = null)
@@ -24,53 +24,53 @@ class Jerapah
 		return new static($version);
 	}
 
-	public function setAccount(string $value): Jerapah
+	public function setAccount(?string $value): Jerapah
 	{
-		$this->params['ACC'] = preg_replace('#\s#', '', $value);
+		$this->params["ACC"] = preg_replace("/\s/", "", $value);
 
 		return $this;
 	}
 
-	public function setAmount(float $value): Jerapah
+	public function setAmount(?float $value): Jerapah
 	{
-		$this->params['AM'] = $value;
+		$this->params["AM"] = $value;
 
 		return $this;
 	}
 
-	public function setCurrency(string $value): Jerapah
+	public function setCurrency(?string $value): Jerapah
 	{
-		$this->params['CC'] = $value;
+		$this->params["CC"] = $value;
 
 		return $this;
 	}
 
-	public function setInMessage(string $value): Jerapah
+	public function setInMessage(?string $value): Jerapah
 	{
-		$this->params['MSG'] = $value;
+		$this->params["MSG"] = $value;
 
 		return $this;
 	}
 
-	public function setVS(string $value): Jerapah
+	public function setVS(?string $value): Jerapah
 	{
-		$this->params['X-VS'] = $value;
+		$this->params["X-VS"] = $value;
 
 		return $this;
 	}
 
-	public function setURL(string $value): Jerapah
+	public function setURL(?string $value): Jerapah
 	{
-		$this->params['X-URL'] = $value;
+		$this->params["X-URL"] = $value;
 
 		return $this;
 	}
 
 	public function getString(): string
 	{
-		$string = 'SPD*' . $this->version . '*';
+		$string = "SPD*{$this->version}*";
 		foreach ($this->params as $key => $value) {
-			$string .= $key . ':' . $value . '*';
+			$string .= "{$key}:{$value}*";
 		}
 
 		return $string;
@@ -80,8 +80,8 @@ class Jerapah
 	{
 		try {
 			return "https://api.qrserver.com/v1/create-qr-code/?" . http_build_query([
-				'size' => "{$size}x{$size}",
-				'data' => $this->getString(),
+				"size" => "{$size}x{$size}",
+				"data" => $this->getString(),
 			]);
 		} catch (\Throwable $e) {
 			return null;
@@ -91,8 +91,8 @@ class Jerapah
 	public static function generateIBAN(string $bankCode, ?string $accountPrefix, string $accountNumber): string
 	{
 		$iban = new \PHP_IBAN\IBAN(implode([
-			'CZ',
-			'00',
+			"CZ",
+			"00",
 			$bankCode,
 			str_pad($accountPrefix, 6, 0, \STR_PAD_LEFT),
 			str_pad($accountNumber, 10, 0, \STR_PAD_LEFT),
