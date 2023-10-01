@@ -88,10 +88,10 @@ class Jerapah
 		}
 	}
 
-	public static function generateIBAN(string $bankCode, ?string $accountPrefix, string $accountNumber): string
+	public static function generateIBAN(string $countryCode, string $bankCode, ?string $accountPrefix, string $accountNumber): string
 	{
 		$iban = new \PHP_IBAN\IBAN(implode([
-			"CZ",
+			$countryCode ?: "CZ",
 			"00",
 			$bankCode,
 			str_pad($accountPrefix, 6, 0, \STR_PAD_LEFT),
