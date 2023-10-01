@@ -3,7 +3,8 @@
 	"description": "qr code payment utility",
 	"type": "library",
 	"require" : {
-		"curl/curl": "@stable"
+		"curl/curl": "@stable",
+		"globalcitizen/php-iban": "@stable"
 	},
 	"autoload": {
 		"psr-4": {

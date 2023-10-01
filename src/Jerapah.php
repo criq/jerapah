@@ -4,7 +4,7 @@ namespace Jerapah;
 
 class Jerapah
 {
-	public $version = '1.0';
+	public $version = "1.0";
 	public $params = [];
 
 	public function __construct($version = null)
@@ -14,95 +14,91 @@ class Jerapah
 		}
 	}
 
-	public function __toString()
+	public function __toString(): string
 	{
-		return (string)$this->getImageUrl(400);
+		return $this->getImageUrl(400);
 	}
 
-	public static function make($version = null)
+	public static function make(string $version = null): Jerapah
 	{
 		return new static($version);
 	}
 
-	public function setAccount($value)
+	public function setAccount(?string $value): Jerapah
 	{
-		$this->params['ACC'] = preg_replace('/\s/', null, $value);
+		$this->params["ACC"] = preg_replace("/\s/", "", $value);
 
 		return $this;
 	}
 
-	public function setAmount($value)
+	public function setAmount(?float $value): Jerapah
 	{
-		$this->params['AM'] = $value;
+		$this->params["AM"] = $value;
 
 		return $this;
 	}
 
-	public function setCurrency($value)
+	public function setCurrency(?string $value): Jerapah
 	{
-		$this->params['CC'] = $value;
+		$this->params["CC"] = $value;
 
 		return $this;
 	}
 
-	public function setInMessage($value)
+	public function setInMessage(?string $value): Jerapah
 	{
-		$this->params['MSG'] = $value;
+		$this->params["MSG"] = $value;
 
 		return $this;
 	}
 
-	public function setVS($value)
+	public function setVS(?string $value): Jerapah
 	{
-		$this->params['X-VS'] = $value;
+		$this->params["X-VS"] = $value;
 
 		return $this;
 	}
 
-	public function setURL($value)
+	public function setURL(?string $value): Jerapah
 	{
-		$this->params['X-URL'] = $value;
+		$this->params["X-URL"] = $value;
 
 		return $this;
 	}
 
-	public function getString()
+	public function getString(): string
 	{
-		$string = 'SPD*' . $this->version . '*';
-
+		$string = "SPD*{$this->version}*";
 		foreach ($this->params as $key => $value) {
-			$string .= $key . ':' . $value . '*';
+			$string .= "{$key}:{$value}*";
 		}
 
 		return $string;
 	}
 
-	public function getImageUrl($size = 400, $provider = 'google')
-	{
-		switch ($provider) {
-			case 'google':
-				return \Katu\Types\TUrl::make('https://chart.googleapis.com/chart', [
-					'cht' => 'qr',
-					'chs' => $size,
-					'chl' => $this->getString(),
-				]);
-
-				break;
-		}
-
-		throw new \Exception("Invalid provider.");
-	}
-
-	public function getEncoded()
+	public function getImageUrl(int $size): ?string
 	{
 		try {
-			$curl = new \Curl\Curl;
-			$res = $curl->get($this->getImageUrl());
-			$info = $curl->getInfo();
-
-			return 'data:' . $info['content_type'] . ';base64,' . base64_encode($res);
-		} catch (\Exception $e) {
-			return '';
+			return "https://api.qrserver.com/v1/create-qr-code/?" . http_build_query([
+				"size" => "{$size}x{$size}",
+				"data" => $this->getString(),
+			]);
+		} catch (\Throwable $e) {
+			return null;
 		}
+	}
+
+	public static function generateIBAN(string $countryCode, string $bankCode, ?string $accountPrefix, string $accountNumber): string
+	{
+		$iban = new \PHP_IBAN\IBAN(implode([
+			$countryCode ?: "CZ",
+			"00",
+			$bankCode,
+			str_pad($accountPrefix, 6, 0, \STR_PAD_LEFT),
+			str_pad($accountNumber, 10, 0, \STR_PAD_LEFT),
+		]));
+		$iban->setChecksum();
+
+		return $iban->iban;
 	}
 }
