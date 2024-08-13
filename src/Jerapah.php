@@ -2,6 +2,8 @@
 
 namespace Jerapah;
 
+use Pankki\Account;
+
 class Jerapah
 {
 	public $version = "1.0";
@@ -24,9 +26,9 @@ class Jerapah
 		return new static($version);
 	}
 
-	public function setAccount(?string $value): Jerapah
+	public function setAccount(Account $account): Jerapah
 	{
-		$this->params["ACC"] = preg_replace("/\s/", "", $value);
+		$this->params["ACC"] = $account->getIBAN();
 
 		return $this;
 	}

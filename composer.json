@@ -3,6 +3,7 @@
 	"description": "qr code payment utility",
 	"type": "library",
 	"require" : {
+		"criq/pankki": "@stable",
 		"curl/curl": "@stable",
 		"globalcitizen/php-iban": "@stable"
 	},
