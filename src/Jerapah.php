@@ -3,6 +3,7 @@
 namespace Jerapah;
 
 use Pankki\Account;
+use Pankki\IBAN;
 
 class Jerapah
 {
@@ -26,11 +27,16 @@ class Jerapah
 		return new static($version);
 	}
 
-	public function setAccount(Account $account): Jerapah
+	public function setIBAN(IBAN $iban): Jerapah
 	{
-		$this->params["ACC"] = $account->getIBAN();
+		$this->params["ACC"] = (string)$iban;
 
 		return $this;
+	}
+
+	public function setAccount(Account $account): Jerapah
+	{
+		return $this->setIBAN($account->getIBAN());
 	}
 
 	public function setAmount(?float $value): Jerapah
