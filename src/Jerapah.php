@@ -10,7 +10,7 @@ class Jerapah
 	public $version = "1.0";
 	public $params = [];
 
-	public function __construct($version = null)
+	public function __construct(?string $version = null)
 	{
 		if (!is_null($version)) {
 			$this->version = $version;
@@ -22,7 +22,7 @@ class Jerapah
 		return (string)$this->getQRCode();
 	}
 
-	public static function make(string $version = null): Jerapah
+	public static function make(?string $version = null): Jerapah
 	{
 		return new static($version);
 	}
